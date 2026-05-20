@@ -7,407 +7,342 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f1117;
-  --surface: #181c27;
-  --surface2: #1e2333;
-  --border: #2a3050;
-  --text: #e8eaf0;
-  --text-muted: #7a8099;
-  --text-dim: #4a5070;
-  --accent: #4f8ef7;
-  --accent-glow: rgba(79,142,247,0.12);
-  --l1: #34c98d; --l2: #4f8ef7; --l3: #f59e0b; --l4: #ef6060; --l5: #a78bfa;
-  --company: #4f8ef7;
-  --market: #f59e0b;
-  --over: #34c98d;
-  --under: #ef6060;
-  --radius: 10px;
+  --bg:#0f1117; --surface:#181c27; --surface2:#1e2333; --border:#2a3050;
+  --text:#e8eaf0; --text-muted:#7a8099; --text-dim:#4a5070;
+  --accent:#4f8ef7; --accent-glow:rgba(79,142,247,0.12);
+  --l1:#34c98d; --l2:#4f8ef7; --l3:#f59e0b; --l4:#ef6060; --l5:#a78bfa;
+  --company:#4f8ef7; --market:#f59e0b; --over:#34c98d; --under:#ef6060;
+  --radius:10px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-/* ── Login ── */
-.login-overlay {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-}
-.login-overlay.hidden { display: none; }
-.login-box {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-  padding: 48px 40px; width: 380px; max-width: 90vw; text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
-}
-.login-box .login-icon {
-  width: 56px; height: 56px; border-radius: 14px; background: var(--accent-glow);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px; font-size: 24px;
-}
-.login-box h1 { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
-.login-box .login-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
-.login-box input {
-  width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border);
-  background: var(--surface2); color: var(--text); font-family: 'DM Mono', monospace;
-  font-size: 15px; text-align: center; letter-spacing: .08em; outline: none;
-  transition: border-color .2s;
-}
-.login-box input:focus { border-color: var(--accent); }
-.login-box input::placeholder { color: var(--text-dim); letter-spacing: .05em; font-size: 13px; }
-.login-btn {
-  width: 100%; padding: 12px; margin-top: 14px; border: none; border-radius: 8px;
-  background: var(--accent); color: #fff; font-family: 'Noto Sans TC', sans-serif;
-  font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .15s;
-}
-.login-btn:hover { opacity: .88; }
-.login-error { margin-top: 14px; font-size: 12px; color: var(--under); min-height: 18px; font-family: 'DM Mono', monospace; }
+/* Login */
+.login-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;}
+.login-overlay.hidden{display:none;}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:48px 40px;width:380px;max-width:90vw;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.login-box .login-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;}
+.login-box h1{font-size:22px;font-weight:900;margin-bottom:4px;}
+.login-box .login-sub{font-size:13px;color:var(--text-muted);margin-bottom:28px;}
+.login-box input{width:100%;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:15px;text-align:center;letter-spacing:.08em;outline:none;transition:border-color .2s;}
+.login-box input:focus{border-color:var(--accent);}
+.login-box input::placeholder{color:var(--text-dim);letter-spacing:.05em;font-size:13px;}
+.login-btn{width:100%;padding:12px;margin-top:14px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.login-btn:hover{opacity:.88;}
+.login-error{margin-top:14px;font-size:12px;color:var(--under);min-height:18px;font-family:'DM Mono',monospace;}
 
-/* ── Layout ── */
-.layout { display: flex; min-height: 100vh; }
-.layout.hidden { display: none; }
+/* Layout */
+.layout{display:flex;min-height:100vh;}
+.layout.hidden{display:none;}
 
-/* ── Sidebar ── */
-.sidebar {
-  width: 220px; flex-shrink: 0; background: var(--surface);
-  border-right: 1px solid var(--border); display: flex; flex-direction: column;
-  position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 10;
-}
-.sidebar-logo { padding: 22px 20px 14px; border-bottom: 1px solid var(--border); }
-.sidebar-logo .co { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); font-family: 'DM Mono', monospace; }
-.sidebar-logo .ti { font-size: 15px; font-weight: 800; color: var(--text); margin-top: 3px; }
-.sidebar-logo .yr { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); margin-top: 2px; }
-.dept-list { padding: 10px 0; flex: 1; }
-.dept-all {
-  display: flex; align-items: center; gap: 8px; padding: 9px 20px; cursor: pointer;
-  font-size: 13px; font-weight: 700; color: var(--text-muted);
-  border-left: 3px solid transparent; transition: all .15s; margin-bottom: 4px;
-}
-.dept-all:hover { color: var(--text); background: var(--surface2); }
-.dept-all.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); }
-.dept-btn {
-  width: 100%; display: flex; align-items: center; gap: 6px; padding: 8px 20px;
-  background: none; border: none; border-left: 3px solid transparent; cursor: pointer;
-  text-align: left; font-family: 'Noto Sans TC', sans-serif; font-size: 13px;
-  color: var(--text-muted); transition: all .15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.dept-btn:hover { color: var(--text); background: var(--surface2); }
-.dept-btn.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); font-weight: 600; }
-.dept-count { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); background: var(--surface2); padding: 1px 5px; border-radius: 3px; flex-shrink: 0; }
-.dept-btn.active .dept-count { color: var(--accent); background: var(--accent-glow); }
-.sidebar-footer {
-  padding: 14px 20px; border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap;
-}
-.user-tag { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); background: var(--accent-glow); padding: 3px 8px; border-radius: 4px; }
-.logout-btn {
-  background: none; border: 1px solid var(--border); border-radius: 5px; padding: 4px 10px;
-  font-size: 11px; color: var(--text-muted); cursor: pointer; font-family: 'Noto Sans TC', sans-serif;
-  transition: all .15s;
-}
-.logout-btn:hover { color: var(--under); border-color: var(--under); }
+/* Sidebar */
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:10;}
+.sidebar-logo{padding:22px 20px 14px;border-bottom:1px solid var(--border);}
+.sidebar-logo .co{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);font-family:'DM Mono',monospace;}
+.sidebar-logo .ti{font-size:15px;font-weight:800;color:var(--text);margin-top:3px;}
+.sidebar-logo .yr{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-top:2px;}
+.dept-list{padding:10px 0;flex:1;}
+.dept-all{display:flex;align-items:center;gap:8px;padding:9px 20px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text-muted);border-left:3px solid transparent;transition:all .15s;margin-bottom:4px;}
+.dept-all:hover{color:var(--text);background:var(--surface2);}
+.dept-all.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-glow);}
+.dept-btn{width:100%;display:flex;align-items:center;gap:6px;padding:8px 20px;background:none;border:none;border-left:3px solid transparent;cursor:pointer;text-align:left;font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--text-muted);transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dept-btn:hover{color:var(--text);background:var(--surface2);}
+.dept-btn.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-glow);font-weight:600;}
+.dept-count{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);background:var(--surface2);padding:1px 5px;border-radius:3px;flex-shrink:0;}
+.dept-btn.active .dept-count{color:var(--accent);background:var(--accent-glow);}
+.sidebar-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;}
+.user-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent-glow);padding:3px 8px;border-radius:4px;}
+.logout-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:4px 10px;font-size:11px;color:var(--text-muted);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .15s;}
+.logout-btn:hover{color:var(--under);border-color:var(--under);}
+.admin-btn{width:calc(100% - 40px);margin:0 20px 14px;padding:7px;border:1px dashed var(--border);border-radius:6px;background:none;color:var(--text-dim);font-size:11px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:all .15s;display:none;}
+.admin-btn:hover{border-color:var(--accent);color:var(--accent);}
+.admin-btn.visible{display:block;}
 
-/* ── Admin 管理員按鈕（側邊欄底部） ── */
-.admin-btn {
-  width: calc(100% - 40px); margin: 0 20px 14px;
-  padding: 7px; border: 1px dashed var(--border); border-radius: 6px;
-  background: none; color: var(--text-dim); font-size: 11px;
-  font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all .15s;
-  display: none;
-}
-.admin-btn:hover { border-color: var(--accent); color: var(--accent); }
-.admin-btn.visible { display: block; }
+/* Main */
+.main{margin-left:220px;flex:1;padding:32px 36px 60px;}
+.main-header{margin-bottom:24px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.dept-title{font-size:clamp(18px,3vw,26px);font-weight:900;}
+.dept-subtitle{font-size:12px;color:var(--text-muted);margin-top:3px;font-family:'DM Mono',monospace;}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.ctrl-label{font-size:12px;color:var(--text-muted);}
+.toggle-group{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:3px;gap:2px;}
+.toggle-btn{padding:5px 13px;border:none;background:transparent;border-radius:5px;font-family:'Noto Sans TC',sans-serif;font-size:12px;cursor:pointer;color:var(--text-muted);transition:all .15s;}
+.toggle-btn.active{background:var(--accent);color:#fff;font-weight:600;}
 
-/* ── Main ── */
-.main { margin-left: 220px; flex: 1; padding: 32px 36px 60px; }
-.main-header { margin-bottom: 24px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-.dept-title { font-size: clamp(18px,3vw,26px); font-weight: 900; }
-.dept-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-family: 'DM Mono', monospace; }
-.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.ctrl-label { font-size: 12px; color: var(--text-muted); }
-.toggle-group { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 3px; gap: 2px; }
-.toggle-btn { padding: 5px 13px; border: none; background: transparent; border-radius: 5px; font-family: 'Noto Sans TC', sans-serif; font-size: 12px; cursor: pointer; color: var(--text-muted); transition: all .15s; }
-.toggle-btn.active { background: var(--accent); color: #fff; font-weight: 600; }
+/* Stats */
+.stats-row{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 18px;min-width:90px;}
+.stat-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-family:'DM Mono',monospace;margin-bottom:3px;}
+.stat-value{font-size:20px;font-weight:900;color:var(--text);font-family:'DM Mono',monospace;}
+.stat-value span{font-size:12px;color:var(--text-muted);font-weight:400;}
 
-/* ── Stats ── */
-.stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; min-width: 90px; }
-.stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; font-family: 'DM Mono', monospace; margin-bottom: 3px; }
-.stat-value { font-size: 20px; font-weight: 900; color: var(--text); font-family: 'DM Mono', monospace; }
-.stat-value span { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+/* Legend */
+.legend{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);}
+.legend-dot{width:10px;height:10px;border-radius:2px;}
+.legend-sep{color:var(--border);font-size:18px;margin:0 4px;}
 
-/* ── Legend ── */
-.legend { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
-.legend-sep { color: var(--border); font-size: 18px; margin: 0 4px; }
+/* Table */
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead{background:var(--surface2);}
+th{padding:11px 14px;text-align:left;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-family:'DM Mono',monospace;white-space:nowrap;}
+th.center{text-align:center;}
+tbody tr{border-top:1px solid var(--border);transition:background .12s;}
+tbody tr:hover{background:var(--surface2);}
+td{padding:13px 14px;font-size:15px;vertical-align:middle;}
+td.center{text-align:center;}
+.dept-tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--surface2);color:var(--text-muted);font-family:'DM Mono',monospace;white-space:nowrap;margin-bottom:3px;}
+.level-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:18px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;font-weight:600;}
+.L1{background:rgba(52,201,141,.15);color:var(--l1);}
+.L2{background:rgba(79,142,247,.15);color:var(--l2);}
+.L3{background:rgba(245,158,11,.15);color:var(--l3);}
+.L4{background:rgba(239,96,96,.15);color:var(--l4);}
+.L5{background:rgba(167,139,250,.15);color:var(--l5);}
 
-/* ── Desktop Table ── */
-.table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-table { width: 100%; border-collapse: collapse; }
-thead { background: var(--surface2); }
-th { padding: 11px 14px; text-align: left; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
-th.center { text-align: center; }
-tbody tr { border-top: 1px solid var(--border); transition: background .12s; }
-tbody tr:hover { background: var(--surface2); }
-td { padding: 13px 14px; font-size: 15px; vertical-align: middle; }
-td.center { text-align: center; }
-.dept-tag { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--surface2); color: var(--text-muted); font-family: 'DM Mono', monospace; white-space: nowrap; margin-bottom: 3px; }
-.level-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 18px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 600; }
-.L1 { background: rgba(52,201,141,.15); color: var(--l1); }
-.L2 { background: rgba(79,142,247,.15); color: var(--l2); }
-.L3 { background: rgba(245,158,11,.15); color: var(--l3); }
-.L4 { background: rgba(239,96,96,.15); color: var(--l4); }
-.L5 { background: rgba(167,139,250,.15); color: var(--l5); }
-.job-title { font-weight: 500; color: var(--text); }
-.bar-cell { min-width: 160px; }
-.bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.bar-track { width: 100%; max-width: 140px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; position: relative; }
-.bar-fill { height: 100%; border-radius: 3px; position: absolute; top: 0; }
-.bar-nums { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 600; white-space: nowrap; }
-.bar-mid { font-size: 10px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
-.empty-s { font-size: 11px; color: var(--text-dim); font-family: 'DM Mono', monospace; }
-.gap-cell { min-width: 90px; text-align: center; }
-.gap-badge { display: inline-flex; align-items: center; gap: 3px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 5px; white-space: nowrap; }
-.gap-over { background: rgba(52,201,141,.12); color: var(--over); }
-.gap-under { background: rgba(239,96,96,.12); color: var(--under); }
-.gap-match { background: rgba(79,142,247,.1); color: var(--accent); }
-.gap-empty { color: var(--text-dim); font-size: 11px; font-family: 'DM Mono', monospace; }
+/* 職位名稱可點擊 */
+.job-title{font-weight:500;color:var(--text);}
+.job-title-link{font-weight:500;color:var(--text);cursor:pointer;border-bottom:1px dashed var(--accent);transition:color .15s;display:inline-flex;align-items:center;gap:5px;}
+.job-title-link:hover{color:var(--accent);}
+.jd-badge{font-family:'DM Mono',monospace;font-size:9px;padding:1px 5px;border-radius:3px;background:var(--accent-glow);color:var(--accent);flex-shrink:0;}
 
-/* ── Note ── */
-.note-bar { max-width: 900px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin-top: 20px; font-size: 12px; color: var(--text-muted); line-height: 1.7; }
-.note-bar strong { color: var(--text); }
+.bar-cell{min-width:160px;}
+.bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bar-track{width:100%;max-width:140px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:3px;position:absolute;top:0;}
+.bar-nums{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;white-space:nowrap;}
+.bar-mid{font-size:10px;color:var(--text-muted);font-family:'DM Mono',monospace;}
+.empty-s{font-size:11px;color:var(--text-dim);font-family:'DM Mono',monospace;}
+.gap-cell{min-width:90px;text-align:center;}
+.gap-badge{display:inline-flex;align-items:center;gap:3px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap;}
+.gap-over{background:rgba(52,201,141,.12);color:var(--over);}
+.gap-under{background:rgba(239,96,96,.12);color:var(--under);}
+.gap-match{background:rgba(79,142,247,.1);color:var(--accent);}
+.gap-empty{color:var(--text-dim);font-size:11px;font-family:'DM Mono',monospace;}
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.note-bar{max-width:900px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 20px;margin-top:20px;font-size:12px;color:var(--text-muted);line-height:1.7;}
+.note-bar strong{color:var(--text);}
 
-/* ── Mobile Bar ── */
-.mobile-user-bar {
-  display: none; background: var(--surface); border-bottom: 1px solid var(--border);
-  padding: 8px 16px; align-items: center; justify-content: space-between;
-}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--surface);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
-/* ── Mobile ── */
-@media (max-width: 700px) {
-  .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
-  .sidebar-logo { display: none; }
-  .sidebar-footer { display: none; }
-  .dept-list { display: flex; flex-direction: row; padding: 8px; gap: 4px; overflow-x: auto; width: 100%; white-space: nowrap; }
-  .dept-btn { padding: 6px 12px; border-left: none; border-bottom: 2px solid transparent; border-radius: 6px; width: auto; flex-shrink: 0; }
-  .dept-btn.active { border-bottom-color: var(--accent); border-left-color: transparent; }
-  .dept-all { padding: 6px 12px; border-left: none; margin-bottom: 0; flex-shrink: 0; }
-  .layout { flex-direction: column; }
-  .main { margin-left: 0; padding: 12px 12px 40px; }
-  .dept-count { display: none; }
-  .mobile-user-bar { display: flex !important; }
-  .stats-row { gap: 8px; }
-  .stat-card { padding: 10px 14px; min-width: 0; flex: 1 1 calc(50% - 8px); }
-  .stat-value { font-size: 16px; }
-  .table-wrap { display: none; }
-  .card-list { display: flex !important; }
-  .legend { gap: 8px; }
-  .legend-item { font-size: 11px; }
-  .main-header { margin-bottom: 16px; }
-  .dept-title { font-size: 18px; }
-  .admin-btn { display: none !important; }
-}
+.mobile-user-bar{display:none;background:var(--surface);border-bottom:1px solid var(--border);padding:8px 16px;align-items:center;justify-content:space-between;}
 
-/* ── Mobile Card Layout ── */
-.card-list { display: none; flex-direction: column; gap: 10px; }
-.salary-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
-.card-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.card-dept-tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--surface2); color: var(--text-muted); font-family: 'DM Mono', monospace; }
-.card-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; min-width: 0; }
-.card-rows { display: flex; flex-direction: column; gap: 8px; }
-.card-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.card-row-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; min-width: 95px; }
-.card-row-right { display: flex; align-items: center; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
-.card-salary { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 600; white-space: nowrap; }
-.card-mid { font-size: 10px; color: var(--text-muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
-.card-divider { height: 1px; background: var(--border); }
+@media(max-width:700px){
+  .sidebar{width:100%;height:auto;position:relative;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border);}
+  .sidebar-logo{display:none;} .sidebar-footer{display:none;}
+  .dept-list{display:flex;flex-direction:row;padding:8px;gap:4px;overflow-x:auto;width:100%;white-space:nowrap;}
+  .dept-btn{padding:6px 12px;border-left:none;border-bottom:2px solid transparent;border-radius:6px;width:auto;flex-shrink:0;}
+  .dept-btn.active{border-bottom-color:var(--accent);border-left-color:transparent;}
+  .dept-all{padding:6px 12px;border-left:none;margin-bottom:0;flex-shrink:0;}
+  .layout{flex-direction:column;} .main{margin-left:0;padding:12px 12px 40px;}
+  .dept-count{display:none;} .mobile-user-bar{display:flex!important;}
+  .stats-row{gap:8px;} .stat-card{padding:10px 14px;min-width:0;flex:1 1 calc(50% - 8px);} .stat-value{font-size:16px;}
+  .table-wrap{display:none;} .card-list{display:flex!important;} .legend{gap:8px;} .legend-item{font-size:11px;}
+  .main-header{margin-bottom:16px;} .dept-title{font-size:18px;} .admin-btn{display:none!important;}
+}
+.card-list{display:none;flex-direction:column;gap:10px;}
+.salary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.card-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.card-dept-tag{font-size:10px;padding:2px 6px;border-radius:3px;background:var(--surface2);color:var(--text-muted);font-family:'DM Mono',monospace;}
+.card-title{font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;}
+.card-rows{display:flex;flex-direction:column;gap:8px;}
+.card-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.card-row-label{font-size:11px;color:var(--text-muted);white-space:nowrap;min-width:95px;}
+.card-row-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
+.card-salary{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;white-space:nowrap;}
+.card-mid{font-size:10px;color:var(--text-muted);font-family:'DM Mono',monospace;white-space:nowrap;}
+.card-divider{height:1px;background:var(--border);}
 
-/* ══════════════════════════════════════════
-   管理員編輯 Modal
-══════════════════════════════════════════ */
-.modal-backdrop {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.72); z-index: 2000;
-  align-items: center; justify-content: center;
-}
-.modal-backdrop.open { display: flex; }
-.modal {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-  width: 96vw; max-width: 900px; max-height: 90vh;
-  display: flex; flex-direction: column;
-  animation: fadeUp .2s ease;
-}
-@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-.modal-head {
-  padding: 20px 24px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.modal-head h2 { font-size: 16px; font-weight: 700; }
-.modal-head .badge { font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 4px; background: rgba(239,96,96,.12); color: var(--under); margin-left: 10px; }
-.modal-close-x { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; padding: 4px 8px; border-radius: 4px; transition: color .15s; }
-.modal-close-x:hover { color: var(--text); }
-.modal-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
-.modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+/* ══ Modal 共用 ══ */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;align-items:center;justify-content:center;}
+.modal-backdrop.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:96vw;max-width:860px;max-height:90vh;display:flex;flex-direction:column;animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-head h2{font-size:16px;font-weight:700;}
+.modal-head .badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(239,96,96,.12);color:var(--under);margin-left:10px;}
+.modal-close-x{background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:4px;transition:color .15s;}
+.modal-close-x:hover{color:var(--text);}
+.modal-body{flex:1;overflow-y:auto;padding:24px;}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 
-/* 編輯表格 */
-.edit-table-wrap { overflow-x: auto; }
-.edit-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.edit-table th {
-  padding: 8px 10px; background: var(--surface2); color: var(--text-muted);
-  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .08em;
-  text-transform: uppercase; white-space: nowrap; text-align: left;
-  border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1;
-}
-.edit-table td { padding: 6px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-.edit-table tr:last-child td { border-bottom: none; }
-.edit-table tr:hover td { background: var(--surface2); }
-.edit-input {
-  width: 100%; padding: 5px 8px; border-radius: 5px; border: 1px solid var(--border);
-  background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace;
-  font-size: 12px; outline: none; min-width: 60px; transition: border-color .15s;
-}
-.edit-input:focus { border-color: var(--accent); }
-.edit-input.wide { min-width: 110px; }
-.edit-input.level-sel { min-width: 55px; }
-.del-btn {
-  padding: 3px 8px; background: none; border: 1px solid transparent; border-radius: 4px;
-  color: var(--text-dim); cursor: pointer; font-size: 13px; transition: all .15s;
-}
-.del-btn:hover { border-color: var(--under); color: var(--under); }
-.add-row-btn {
-  padding: 6px 14px; background: none; border: 1px dashed var(--border); border-radius: 6px;
-  color: var(--text-muted); cursor: pointer; font-size: 12px; font-family: 'Noto Sans TC', sans-serif;
-  transition: all .15s; margin-top: 10px;
-}
-.add-row-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* ══ JD 閱覽 Modal ══ */
+.jd-modal{max-width:700px;}
+.jd-modal-head{background:linear-gradient(135deg,var(--surface2),var(--surface));padding:24px 28px;border-bottom:1px solid var(--border);}
+.jd-title-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+.jd-main-title{font-size:22px;font-weight:900;color:var(--text);}
+.jd-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.jd-meta-item{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+.jd-section{margin-bottom:22px;}
+.jd-section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.jd-summary{font-size:14px;line-height:1.8;color:var(--text-muted);}
+.jd-list{list-style:none;}
+.jd-list li{padding:7px 0 7px 16px;font-size:13.5px;line-height:1.6;border-bottom:1px dashed var(--border);position:relative;color:var(--text-muted);}
+.jd-list li:last-child{border-bottom:none;}
+.jd-list li::before{content:'—';position:absolute;left:0;color:var(--accent);font-family:'DM Mono',monospace;}
+.jd-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.jd-tag{padding:4px 10px;border-radius:4px;font-size:12px;background:var(--surface2);color:var(--text-muted);border:1px solid var(--border);}
+.jd-tag.must{background:rgba(79,142,247,.1);border-color:rgba(79,142,247,.3);color:var(--accent);}
+.jd-kpi{font-size:13px;color:var(--text-muted);line-height:1.7;padding:10px 14px;background:var(--surface2);border-radius:6px;border-left:3px solid var(--accent);}
+.jd-salary-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;}
+.jd-sal-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.jd-sal-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:5px;}
+.jd-sal-value{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;margin-bottom:3px;}
+.jd-sal-sub{font-size:11px;color:var(--text-dim);}
+.jd-no-data{text-align:center;padding:32px;color:var(--text-dim);}
+.jd-no-data .icon{font-size:28px;margin-bottom:10px;}
+.jd-no-data p{font-size:13px;}
+.jd-edit-hint{font-size:11px;color:var(--text-dim);margin-top:6px;}
 
-/* 儲存按鈕 */
-.save-btn {
-  padding: 9px 20px; background: var(--accent); color: #fff; border: none; border-radius: 7px;
-  font-family: 'Noto Sans TC', sans-serif; font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: opacity .15s; display: flex; align-items: center; gap: 6px;
-}
-.save-btn:hover { opacity: .88; }
-.save-btn:disabled { opacity: .45; cursor: not-allowed; }
-.cancel-btn {
-  padding: 9px 18px; background: none; border: 1px solid var(--border); border-radius: 7px;
-  color: var(--text-muted); font-family: 'Noto Sans TC', sans-serif; font-size: 13px;
-  cursor: pointer; transition: all .15s;
-}
-.cancel-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.save-status { font-family: 'DM Mono', monospace; font-size: 12px; margin-left: auto; }
-.save-status.ok { color: var(--over); }
-.save-status.err { color: var(--under); }
-.save-status.loading { color: var(--text-muted); }
+/* ══ 管理員 Modal ══ */
+.edit-table-wrap{overflow-x:auto;}
+.edit-table{width:100%;border-collapse:collapse;font-size:13px;}
+.edit-table th{padding:8px 10px;background:var(--surface2);color:var(--text-muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;text-align:left;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1;}
+.edit-table td{padding:6px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.edit-table tr:last-child td{border-bottom:none;}
+.edit-table tr:hover td{background:var(--surface2);}
+.edit-input{width:100%;padding:5px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;min-width:60px;transition:border-color .15s;}
+.edit-input:focus{border-color:var(--accent);}
+.edit-input.wide{min-width:110px;}
+.edit-input.level-sel{min-width:55px;}
+.del-btn{padding:3px 8px;background:none;border:1px solid transparent;border-radius:4px;color:var(--text-dim);cursor:pointer;font-size:13px;transition:all .15s;}
+.del-btn:hover{border-color:var(--under);color:var(--under);}
+.add-row-btn{padding:6px 14px;background:none;border:1px dashed var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:12px;font-family:'Noto Sans TC',sans-serif;transition:all .15s;margin-top:10px;}
+.add-row-btn:hover{border-color:var(--accent);color:var(--accent);}
+.save-btn{padding:9px 20px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-family:'Noto Sans TC',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;gap:6px;}
+.save-btn:hover{opacity:.88;} .save-btn:disabled{opacity:.45;cursor:not-allowed;}
+.cancel-btn{padding:9px 18px;background:none;border:1px solid var(--border);border-radius:7px;color:var(--text-muted);font-family:'Noto Sans TC',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;}
+.cancel-btn:hover{border-color:var(--text-muted);color:var(--text);}
+.save-status{font-family:'DM Mono',monospace;font-size:12px;margin-left:auto;}
+.save-status.ok{color:var(--over);} .save-status.err{color:var(--under);} .save-status.loading{color:var(--text-muted);}
+.admin-pw-row{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);margin-bottom:16px;}
+.admin-pw-row label{font-size:12px;color:var(--text-muted);white-space:nowrap;}
+.admin-pw-input{flex:1;padding:6px 10px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border-color .15s;}
+.admin-pw-input:focus{border-color:var(--accent);}
+.admin-notice{font-size:11px;color:var(--text-dim);margin-bottom:14px;padding:8px 12px;background:rgba(239,96,96,.06);border-radius:6px;border-left:2px solid var(--under);}
 
-/* 管理員密碼輸入（modal 內） */
-.admin-pw-row {
-  display: flex; align-items: center; gap: 8px;
-  padding: 12px 14px; background: var(--surface2); border-radius: 8px;
-  border: 1px solid var(--border); margin-bottom: 16px;
-}
-.admin-pw-row label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
-.admin-pw-input {
-  flex: 1; padding: 6px 10px; border-radius: 5px; border: 1px solid var(--border);
-  background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace;
-  font-size: 13px; outline: none; transition: border-color .15s;
-}
-.admin-pw-input:focus { border-color: var(--accent); }
-.admin-notice {
-  font-size: 11px; color: var(--text-dim); margin-bottom: 14px;
-  padding: 8px 12px; background: rgba(239,96,96,.06); border-radius: 6px; border-left: 2px solid var(--under);
-}
+/* 分頁標籤（薪酬 / JD） */
+.edit-tabs{display:flex;gap:4px;margin-bottom:16px;}
+.edit-tab{padding:7px 18px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--text-muted);font-family:'Noto Sans TC',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;}
+.edit-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600;}
+.edit-panel{display:none;} .edit-panel.active{display:block;}
+
+/* JD 編輯區 */
+.jd-edit-list{display:flex;flex-direction:column;gap:12px;}
+.jd-edit-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.jd-edit-card-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .15s;}
+.jd-edit-card-head:hover{background:rgba(79,142,247,.06);}
+.jd-edit-card-head .title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.jd-edit-card-body{padding:14px;border-top:1px solid var(--border);display:none;}
+.jd-edit-card-body.open{display:block;}
+.jd-field{margin-bottom:12px;}
+.jd-field label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px;}
+.jd-textarea{width:100%;padding:8px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-size:13px;outline:none;resize:vertical;min-height:70px;transition:border-color .15s;line-height:1.6;}
+.jd-textarea:focus{border-color:var(--accent);}
+.jd-hint{font-size:11px;color:var(--text-dim);margin-top:4px;}
+.chevron{font-size:12px;color:var(--text-dim);transition:transform .2s;}
+.chevron.open{transform:rotate(180deg);}
 </style>
 </head>
 <body>
 
-<!-- ===== LOGIN ===== -->
+<!-- LOGIN -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
     <div class="login-icon">🔐</div>
     <h1>薪酬級距查詢系統</h1>
     <p class="login-sub">請輸入您的專屬密碼以檢視資料</p>
-    <input type="password" id="empInput" placeholder="請輸入密碼" maxlength="20"
-           onkeydown="if(event.key==='Enter')doLogin()" autofocus>
+    <input type="password" id="empInput" placeholder="請輸入密碼" maxlength="20" onkeydown="if(event.key==='Enter')doLogin()" autofocus>
     <button class="login-btn" onclick="doLogin()">登 入</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
-<!-- ===== APP ===== -->
+<!-- APP -->
 <div class="layout hidden" id="appLayout">
-
-<div class="mobile-user-bar" id="mobileBar">
-  <span class="user-tag" id="mobileUser"></span>
-  <button class="logout-btn" onclick="doLogout()">登出</button>
-</div>
-
-<nav class="sidebar">
-  <div class="sidebar-logo">
-    <div class="co">Compensation Reference</div>
-    <div class="ti">薪酬級距對照</div>
-    <div class="yr">2026 版 · 含市場行情</div>
-  </div>
-  <div class="dept-list" id="deptList"></div>
-  <button class="admin-btn" id="adminBtn" onclick="openAdminModal()">⚙ 管理員編輯資料</button>
-  <div class="sidebar-footer">
-    <span class="user-tag" id="userTag"></span>
+  <div class="mobile-user-bar" id="mobileBar">
+    <span class="user-tag" id="mobileUser"></span>
     <button class="logout-btn" onclick="doLogout()">登出</button>
   </div>
-</nav>
-
-<main class="main">
-  <div class="main-header">
-    <div>
-      <div class="dept-title" id="deptTitle">全公司</div>
-      <div class="dept-subtitle" id="deptSub"></div>
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="co">Compensation Reference</div>
+      <div class="ti">薪酬級距對照</div>
+      <div class="yr">2026 版 · 含市場行情</div>
     </div>
-    <div class="controls">
-      <span class="ctrl-label">薪資：</span>
-      <div class="toggle-group">
-        <button class="toggle-btn active" onclick="setUnit('k')">K</button>
-        <button class="toggle-btn" onclick="setUnit('full')">完整</button>
+    <div class="dept-list" id="deptList"></div>
+    <button class="admin-btn" id="adminBtn" onclick="openAdminModal()">⚙ 管理員編輯資料</button>
+    <div class="sidebar-footer">
+      <span class="user-tag" id="userTag"></span>
+      <button class="logout-btn" onclick="doLogout()">登出</button>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="main-header">
+      <div>
+        <div class="dept-title" id="deptTitle">全公司</div>
+        <div class="dept-subtitle" id="deptSub"></div>
+      </div>
+      <div class="controls">
+        <span class="ctrl-label">薪資：</span>
+        <div class="toggle-group">
+          <button class="toggle-btn active" onclick="setUnit('k')">K</button>
+          <button class="toggle-btn" onclick="setUnit('full')">完整</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="stats-row" id="statsRow"></div>
-
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--company)"></div>公司現況 (2025)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--market)"></div>全產業市場 (2026)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l1)"></div>🧬 生技業市場 (2026)｜僅研發、品管、生產、採購顯示</div>
-    <span class="legend-sep">|</span>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l1)"></div>L1</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l2)"></div>L2</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l3)"></div>L3</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l4)"></div>L4</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--l5)"></div>L5</div>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead><tr id="tableHead"></tr></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-
-  <div class="card-list" id="cardList"></div>
-
-  <div class="note-bar">
-    <strong>資料說明：</strong>
-    市場行情整合自 1111人力銀行薪資公秤、104人資學院薪資調查、比薪水平台、行政院主計總處 2025 年受雇員工薪資統計，以月薪經常性薪資計算（不含年終、績效、股票）。
-    <strong>全產業</strong>為跨行業整體市場水位（P25–P75）。
-    <strong>🧬 生技業</strong>數據針對研發、品管、生產、採購四部門，參考 104 生技醫療類職缺薪資、1111 生物科技研發人員薪資公秤、醫療保健業薪資成長 +3.51% 等數據，並依 GMP/GDP 合規加成（約 10–20%）推估。「差異」欄均以公司中位數對比各自市場中位數計算。
-    2026 年基本工資月薪 <strong>29,500 元</strong>。
-  </div>
-</main>
+    <div class="stats-row" id="statsRow"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--company)"></div>公司現況 (2025)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--market)"></div>全產業市場 (2026)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l1)"></div>🧬 生技業市場 (2026)｜僅研發、品管、生產、採購顯示</div>
+      <span class="legend-sep">|</span>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l1)"></div>L1</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l2)"></div>L2</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l3)"></div>L3</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l4)"></div>L4</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--l5)"></div>L5</div>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr id="tableHead"></tr></thead><tbody id="tableBody"></tbody></table>
+    </div>
+    <div class="card-list" id="cardList"></div>
+    <div class="note-bar">
+      <strong>資料說明：</strong>
+      市場行情整合自 1111人力銀行薪資公秤、104人資學院薪資調查、比薪水平台、行政院主計總處 2025 年受雇員工薪資統計，以月薪經常性薪資計算（不含年終、績效、股票）。
+      <strong>全產業</strong>為跨行業整體市場水位（P25–P75）。
+      <strong>🧬 生技業</strong>數據針對研發、品管、生產、採購四部門。「差異」欄均以公司中位數對比各自市場中位數計算。
+      2026 年基本工資月薪 <strong>29,500 元</strong>。職位名稱有底線者可點擊查看工作說明書 (JD)。
+    </div>
+  </main>
 </div>
 
-<!-- ===== 管理員編輯 Modal ===== -->
+<!-- JD 閱覽 Modal -->
+<div class="modal-backdrop" id="jdModal">
+  <div class="modal jd-modal">
+    <div class="jd-modal-head">
+      <div class="jd-title-row">
+        <span class="level-badge" id="jdModalLevel"></span>
+        <span class="jd-main-title" id="jdModalTitle"></span>
+      </div>
+      <div class="jd-meta">
+        <span class="jd-meta-item">🏢 <span id="jdModalDept"></span></span>
+        <span class="jd-meta-item">📊 薪酬：<span id="jdModalSalary"></span></span>
+      </div>
+    </div>
+    <div class="modal-body" id="jdModalBody"></div>
+    <div class="modal-footer">
+      <button class="cancel-btn" onclick="closeJDModal()">關閉</button>
+      <span id="jdAdminEditBtn" style="display:none">
+        <button class="save-btn" style="background:var(--surface2);color:var(--accent);border:1px solid var(--accent);" onclick="closeJDModal();openAdminModal();switchEditTab('jd')">✎ 編輯此 JD</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 管理員編輯 Modal -->
 <div class="modal-backdrop" id="adminModal">
   <div class="modal">
     <div class="modal-head">
@@ -422,29 +357,31 @@ td.center { text-align: center; }
         <label>管理員密碼</label>
         <input type="password" class="admin-pw-input" id="adminPwInput" placeholder="輸入管理員密碼才能儲存">
       </div>
-      <div class="admin-notice">
-        ⚠ 修改後按「儲存並推送 GitHub」，Vercel 將在約 30 秒內自動重新部署，所有使用者即可看到更新後的資料。
+      <div class="admin-notice">⚠ 修改後按「儲存並推送 GitHub」，Vercel 將在約 30 秒內自動重新部署。</div>
+      <div class="edit-tabs">
+        <button class="edit-tab active" onclick="switchEditTab('salary')">💰 薪酬數字</button>
+        <button class="edit-tab" onclick="switchEditTab('jd')">📋 工作說明書 (JD)</button>
       </div>
-      <div class="edit-table-wrap">
-        <table class="edit-table">
-          <thead>
-            <tr>
-              <th>部門</th>
-              <th>職稱</th>
-              <th>職等</th>
-              <th>公司下限</th>
-              <th>公司上限</th>
-              <th>市場下限</th>
-              <th>市場上限</th>
-              <th>生技下限</th>
-              <th>生技上限</th>
+      <!-- 薪酬編輯面板 -->
+      <div class="edit-panel active" id="editPanelSalary">
+        <div class="edit-table-wrap">
+          <table class="edit-table">
+            <thead><tr>
+              <th>部門</th><th>職稱</th><th>職等</th>
+              <th>公司下限</th><th>公司上限</th>
+              <th>市場下限</th><th>市場上限</th>
+              <th>生技下限</th><th>生技上限</th>
               <th></th>
-            </tr>
-          </thead>
-          <tbody id="editTableBody"></tbody>
-        </table>
+            </tr></thead>
+            <tbody id="editTableBody"></tbody>
+          </table>
+        </div>
+        <button class="add-row-btn" onclick="addEditRow()">＋ 新增職位</button>
       </div>
-      <button class="add-row-btn" onclick="addEditRow()">＋ 新增職位</button>
+      <!-- JD 編輯面板 -->
+      <div class="edit-panel" id="editPanelJD">
+        <div class="jd-edit-list" id="jdEditList"></div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="save-btn" id="saveBtn" onclick="saveAndPush()">
@@ -457,120 +394,82 @@ td.center { text-align: center; }
 </div>
 
 <script>
-// ==================== 密碼對照表 ====================
+// ── 密碼對照表 ──
 const PASSWORD_MAP = {
-  "Xk9mP2vL": "JL0001",
-  "Ht5nR8wQ": "JL0002",
-  "Bj7cF4yN": "JL0003",
-  "Wm3gD6zA": "JL0004",
-  "Qp8sK1xE": "JL0007",
-  "Ry2hV9tC": "JL0012",
-  "Nf6bJ3uM": "JL0013",
-  "Zw4eL7oS": "JL0034",
-  "Gd1iA5pT": "JL0037",
-  "Uc9kH2rF": "JL0060",
-  "Tv3nB8qW": "JL0072",
-  "Px7fE4mY": "JL0075",
-  "Ks5wR1jD": "JL0083",
-  "Mn2cG6hL": "JL0364",
-  "Fq8tX3vA": "JL0392",
-  "Dh4pN9yK": "JL0397"
+  "Xk9mP2vL":"JL0001","Ht5nR8wQ":"JL0002","Bj7cF4yN":"JL0003",
+  "Wm3gD6zA":"JL0004","Qp8sK1xE":"JL0007","Ry2hV9tC":"JL0012",
+  "Nf6bJ3uM":"JL0013","Zw4eL7oS":"JL0034","Gd1iA5pT":"JL0037",
+  "Uc9kH2rF":"JL0060","Tv3nB8qW":"JL0072","Px7fE4mY":"JL0075",
+  "Ks5wR1jD":"JL0083","Mn2cG6hL":"JL0364","Fq8tX3vA":"JL0392",
+  "Dh4pN9yK":"JL0397"
 };
-
-// ==================== 管理員帳號（可多人） ====================
-// 這裡只設定哪些 empId 可以看到編輯按鈕
-// 實際儲存需要輸入管理員密碼（存在 Vercel 環境變數）
 const ADMIN_USERS = ["JL0392"];
-
-// ==================== 權限設定 ====================
 const PERMISSIONS = {
-  "全公司總覽":         ["JL0001","JL0002","JL0003","JL0392"],
-  "秘書室":             ["JL0001","JL0002","JL0003","JL0392"],
-  "法務室":             ["JL0001","JL0002","JL0003","JL0083","JL0392"],
-  "稽核室":             ["JL0001","JL0002","JL0003","JL0392"],
-  "人資部":             ["JL0001","JL0002","JL0003","JL0392"],
-  "財會處":             ["JL0001","JL0002","JL0003","JL0060","JL0392"],
-  "資訊處":             ["JL0001","JL0002","JL0003","JL0012","JL0013","JL0392"],
-  "資材處":             ["JL0001","JL0002","JL0003","JL0034","JL0392"],
-  "採購部":             ["JL0001","JL0002","JL0003","JL0060","JL0392"],
-  "生管部":             ["JL0001","JL0002","JL0003","JL0034","JL0392"],
-  "倉儲部":             ["JL0001","JL0002","JL0003","JL0034","JL0037","JL0392"],
-  "生產部":             ["JL0001","JL0002","JL0003","JL0007","JL0034","JL0392"],
-  "廠務部":             ["JL0001","JL0002","JL0003","JL0034","JL0037","JL0392"],
-  "研發部":             ["JL0001","JL0002","JL0003","JL0034","JL0392"],
-  "品管部":             ["JL0001","JL0002","JL0003","JL0034","JL0392"],
-  "品牌處-設計部":      ["JL0001","JL0002","JL0003","JL0072","JL0392"],
-  "品牌處-品牌創意部":  ["JL0001","JL0002","JL0003","JL0364","JL0392"],
-  "品牌處-品牌策略部":  ["JL0001","JL0002","JL0003","JL0392"],
-  "品牌處-產品開發部":  ["JL0001","JL0002","JL0003","JL0392"],
-  "業務單位":           ["JL0001","JL0002","JL0003","JL0004","JL0075","JL0392"],
-  "新事業開發部":       ["JL0001","JL0002","JL0003","JL0004","JL0392"],
-  "數位商務部":         ["JL0001","JL0002","JL0003","JL0392","JL0397"]
+  "全公司總覽":        ["JL0001","JL0002","JL0003","JL0392"],
+  "秘書室":            ["JL0001","JL0002","JL0003","JL0392"],
+  "法務室":            ["JL0001","JL0002","JL0003","JL0083","JL0392"],
+  "稽核室":            ["JL0001","JL0002","JL0003","JL0392"],
+  "人資部":            ["JL0001","JL0002","JL0003","JL0392"],
+  "財會處":            ["JL0001","JL0002","JL0003","JL0060","JL0392"],
+  "資訊處":            ["JL0001","JL0002","JL0003","JL0012","JL0013","JL0392"],
+  "資材處":            ["JL0001","JL0002","JL0003","JL0034","JL0392"],
+  "採購部":            ["JL0001","JL0002","JL0003","JL0060","JL0392"],
+  "生管部":            ["JL0001","JL0002","JL0003","JL0034","JL0392"],
+  "倉儲部":            ["JL0001","JL0002","JL0003","JL0034","JL0037","JL0392"],
+  "生產部":            ["JL0001","JL0002","JL0003","JL0007","JL0034","JL0392"],
+  "廠務部":            ["JL0001","JL0002","JL0003","JL0034","JL0037","JL0392"],
+  "研發部":            ["JL0001","JL0002","JL0003","JL0034","JL0392"],
+  "品管部":            ["JL0001","JL0002","JL0003","JL0034","JL0392"],
+  "品牌處-設計部":     ["JL0001","JL0002","JL0003","JL0072","JL0392"],
+  "品牌處-品牌創意部": ["JL0001","JL0002","JL0003","JL0364","JL0392"],
+  "品牌處-品牌策略部": ["JL0001","JL0002","JL0003","JL0392"],
+  "品牌處-產品開發部": ["JL0001","JL0002","JL0003","JL0392"],
+  "業務單位":          ["JL0001","JL0002","JL0003","JL0004","JL0075","JL0392"],
+  "新事業開發部":      ["JL0001","JL0002","JL0003","JL0004","JL0392"],
+  "數位商務部":        ["JL0001","JL0002","JL0003","JL0392","JL0397"]
 };
 
-// ==================== 全域狀態 ====================
-let loggedInUser = null;
-let allowedDepts = [];
-let canViewAll = false;
-let currentDept = '__all__';
-let currentUnit = 'k';
-let RAW = []; // 從 data.json 動態載入
+// ── 全域狀態 ──
+let loggedInUser = null, allowedDepts = [], canViewAll = false;
+let currentDept = '__all__', currentUnit = 'k';
+let RAW = [], deptOrder = [], deptMap = {};
 const MAX_SAL = 200000;
-let deptOrder = [];
-let deptMap = {};
 
-// ==================== 啟動：載入資料 ====================
+// ── 載入 data.json ──
 async function loadData() {
   try {
-    const res = await fetch('data.json?t=' + Date.now()); // 加時間戳避免快取
+    const res = await fetch('data.json?t=' + Date.now());
     const json = await res.json();
     RAW = json.rows;
-  } catch (e) {
-    // 若 fetch 失敗（本機開發），顯示提示
-    console.warn('無法載入 data.json，請確認檔案存在', e);
-    RAW = [];
-  }
+  } catch(e) { RAW = []; }
   buildDeptMap();
 }
 
 function buildDeptMap() {
-  deptOrder = [];
-  deptMap = {};
+  deptOrder = []; deptMap = {};
   RAW.forEach(r => {
-    const d = r[0];
-    if (!deptMap[d]) { deptMap[d] = []; deptOrder.push(d); }
-    deptMap[d].push({ dept:r[0], title:r[1], level:r[2], cLow:r[3], cHigh:r[4], mLow:r[5], mHigh:r[6], bLow:r[7]||null, bHigh:r[8]||null });
+    if (!deptMap[r.dept]) { deptMap[r.dept] = []; deptOrder.push(r.dept); }
+    deptMap[r.dept].push(r);
   });
 }
 
-// ==================== 登入 / 登出 ====================
+// ── 登入 / 登出 ──
 function doLogin() {
   const input = document.getElementById('empInput').value.trim();
   const errEl = document.getElementById('loginError');
   if (!input) { errEl.textContent = '請輸入密碼'; return; }
   const empId = PASSWORD_MAP[input];
   if (!empId) { errEl.textContent = '❌ 密碼錯誤，請重新輸入'; return; }
-
   loggedInUser = empId;
-  canViewAll = PERMISSIONS["全公司總覽"] && PERMISSIONS["全公司總覽"].includes(empId);
-  allowedDepts = [];
-  deptOrder.forEach(d => {
-    if (PERMISSIONS[d] && PERMISSIONS[d].includes(empId)) allowedDepts.push(d);
-  });
-
+  canViewAll = PERMISSIONS["全公司總覽"]?.includes(empId);
+  allowedDepts = deptOrder.filter(d => PERMISSIONS[d]?.includes(empId));
   document.getElementById('loginOverlay').classList.add('hidden');
   document.getElementById('appLayout').classList.remove('hidden');
   document.getElementById('userTag').textContent = empId;
   document.getElementById('mobileUser').textContent = empId;
-
-  // 管理員才顯示編輯按鈕
-  if (ADMIN_USERS.includes(empId)) {
-    document.getElementById('adminBtn').classList.add('visible');
-  }
-
+  if (ADMIN_USERS.includes(empId)) document.getElementById('adminBtn').classList.add('visible');
   buildSidebar();
-  if (canViewAll) setDept('__all__');
-  else if (allowedDepts.length > 0) setDept(allowedDepts[0]);
+  setDept(canViewAll ? '__all__' : (allowedDepts[0] || '__all__'));
 }
 
 function doLogout() {
@@ -583,7 +482,7 @@ function doLogout() {
   document.getElementById('empInput').focus();
 }
 
-// ==================== 工具函式 ====================
+// ── 工具函式 ──
 function fmt(v) {
   if (v===null||v===undefined) return '—';
   return currentUnit==='k' ? (v/1000).toFixed(0)+'K' : v.toLocaleString('zh-TW');
@@ -593,7 +492,7 @@ function pct(v) { return Math.min(100,v/MAX_SAL*100); }
 
 function renderBar(lo,hi,color) {
   if (!lo&&!hi) return '<span class="empty-s">— 待填 —</span>';
-  const lP=pct(lo||0), hP=pct(hi||lo), w=hP-lP, m=mid(lo,hi);
+  const lP=pct(lo||0),hP=pct(hi||lo),w=hP-lP,m=mid(lo,hi);
   return '<div class="bar-wrap">'+
     '<div class="bar-nums" style="color:'+color+'">'+fmt(lo)+' – '+fmt(hi)+'</div>'+
     '<div class="bar-track"><div class="bar-fill" style="left:'+lP+'%;width:'+Math.max(w,2)+'%;background:'+color+';opacity:.85"></div></div>'+
@@ -601,9 +500,9 @@ function renderBar(lo,hi,color) {
   '</div>';
 }
 
-function renderGap(row, type) {
-  const cm=mid(row.cLow,row.cHigh);
-  const mm=(type==='b')?mid(row.bLow,row.bHigh):mid(row.mLow,row.mHigh);
+function renderGap(r,type) {
+  const cm=mid(r.cLow,r.cHigh);
+  const mm=(type==='b')?mid(r.bLow,r.bHigh):mid(r.mLow,r.mHigh);
   if (!cm||!mm) return '<span class="gap-empty">—</span>';
   const diff=Math.round((cm-mm)/mm*100);
   if (diff>5)  return '<span class="gap-badge gap-over">▲ '+diff+'%</span>';
@@ -611,19 +510,15 @@ function renderGap(row, type) {
   return '<span class="gap-badge gap-match">≈ 持平</span>';
 }
 
-function renderCardRow(lo, hi, color, label) {
+function renderCardRow(lo,hi,color,label) {
   if (!lo&&!hi) return '<div class="card-row"><span class="card-row-label">'+label+'</span><span style="color:var(--text-dim);font-size:11px">— 待填 —</span></div>';
   const m=mid(lo,hi);
-  return '<div class="card-row">'+
-    '<span class="card-row-label">'+label+'</span>'+
-    '<div class="card-row-right">'+
-      '<span class="card-salary" style="color:'+color+'">'+fmt(lo)+' – '+fmt(hi)+'</span>'+
-      '<span class="card-mid">中位 '+fmt(m)+'</span>'+
-    '</div>'+
-  '</div>';
+  return '<div class="card-row"><span class="card-row-label">'+label+'</span>'+
+    '<div class="card-row-right"><span class="card-salary" style="color:'+color+'">'+fmt(lo)+' – '+fmt(hi)+'</span>'+
+    '<span class="card-mid">中位 '+fmt(m)+'</span></div></div>';
 }
 
-// ==================== 資料取得 ====================
+// ── 資料取得 ──
 function getRows() {
   if (currentDept==='__all__') {
     let rows=[];
@@ -633,68 +528,66 @@ function getRows() {
   return deptMap[currentDept]||[];
 }
 
-// ==================== 統計卡片 ====================
+// ── 統計卡片 ──
 function renderStats(rows) {
-  const cv=rows.filter(r=>r.cLow&&r.cHigh), mv=rows.filter(r=>r.mLow&&r.mHigh);
-  const cMids=cv.map(r=>mid(r.cLow,r.cHigh)), mMids=mv.map(r=>mid(r.mLow,r.mHigh));
-  const under=rows.filter(r=>{const cm=mid(r.cLow,r.cHigh),mm=mid(r.mLow,r.mHigh); return cm&&mm&&(cm-mm)/mm*100<-5;});
-  const over =rows.filter(r=>{const cm=mid(r.cLow,r.cHigh),mm=mid(r.mLow,r.mHigh); return cm&&mm&&(cm-mm)/mm*100>5;});
+  const cv=rows.filter(r=>r.cLow&&r.cHigh),mv=rows.filter(r=>r.mLow&&r.mHigh);
+  const cMids=cv.map(r=>mid(r.cLow,r.cHigh)),mMids=mv.map(r=>mid(r.mLow,r.mHigh));
+  const under=rows.filter(r=>{const cm=mid(r.cLow,r.cHigh),mm=mid(r.mLow,r.mHigh);return cm&&mm&&(cm-mm)/mm*100<-5;});
+  const over =rows.filter(r=>{const cm=mid(r.cLow,r.cHigh),mm=mid(r.mLow,r.mHigh);return cm&&mm&&(cm-mm)/mm*100>5;});
+  const jdCount=rows.filter(r=>r.jd).length;
   document.getElementById('statsRow').innerHTML=[
     {label:'職位數',value:rows.length,unit:'個'},
     {label:'公司中位平均',value:cMids.length?fmt(Math.round(cMids.reduce((a,b)=>a+b,0)/cMids.length)):'—',unit:''},
     {label:'市場中位平均',value:mMids.length?fmt(Math.round(mMids.reduce((a,b)=>a+b,0)/mMids.length)):'—',unit:''},
     {label:'低於市場',value:under.length,unit:'個',color:'var(--under)'},
-    {label:'高於市場',value:over.length,unit:'個',color:'var(--over)'},
+    {label:'附有 JD',value:jdCount,unit:'個',color:'var(--accent)'},
   ].map(c=>'<div class="stat-card"><div class="stat-label">'+c.label+'</div><div class="stat-value" style="color:'+(c.color||'var(--text)')+'">'+c.value+'<span> '+c.unit+'</span></div></div>').join('');
 }
 
-// ==================== 渲染 ====================
+// ── 主渲染 ──
 function render() {
   const rows=getRows(), showDept=currentDept==='__all__';
   const hasBio=rows.some(r=>r.bLow&&r.bHigh);
-
-  const bioTh = hasBio ? '<th class="center bar-cell" style="background:rgba(52,201,141,0.08);color:var(--l1)">🧬 生技業市場 (2026)</th><th class="center gap-cell" style="color:var(--l1)">生技差異</th>' : '';
-  document.getElementById('tableHead').innerHTML =
-    '<th>職等</th>'+
-    '<th>'+(showDept?'部門 / 職稱':'職稱')+'</th>'+
+  const bioTh=hasBio?'<th class="center bar-cell" style="background:rgba(52,201,141,0.08);color:var(--l1)">🧬 生技業市場 (2026)</th><th class="center gap-cell" style="color:var(--l1)">生技差異</th>':'';
+  document.getElementById('tableHead').innerHTML=
+    '<th>職等</th><th>'+(showDept?'部門 / 職稱':'職稱')+'</th>'+
     '<th class="center bar-cell">公司現況 (2025)</th>'+
     '<th class="center bar-cell">全產業市場 (2026)</th>'+
-    '<th class="center gap-cell">差異</th>'+
-    bioTh;
+    '<th class="center gap-cell">差異</th>'+bioTh;
 
-  document.getElementById('tableBody').innerHTML=rows.map(r=>{
-    const bioTd=hasBio?
-      '<td class="center bar-cell">'+(r.bLow?renderBar(r.bLow,r.bHigh,'var(--l1)'):'<span class="empty-s">—</span>')+'</td>'+
-      '<td class="center gap-cell">'+(r.bLow?renderGap(r,'b'):'<span class="empty-s">—</span>')+'</td>':'';
+  document.getElementById('tableBody').innerHTML=rows.map((r,i)=>{
+    const hasJD=!!r.jd;
+    const titleCell=hasJD
+      ? `<span class="job-title-link" onclick="openJDModal(${RAW.indexOf(r)})">${r.title}<span class="jd-badge">JD</span></span>`
+      : `<span class="job-title">${r.title}</span>`;
+    const bioTd=hasBio
+      ? '<td class="center bar-cell">'+(r.bLow?renderBar(r.bLow,r.bHigh,'var(--l1)'):'<span class="empty-s">—</span>')+'</td>'+
+        '<td class="center gap-cell">'+(r.bLow?renderGap(r,'b'):'<span class="empty-s">—</span>')+'</td>':'';
     return '<tr>'+
       '<td><span class="level-badge '+r.level+'">'+r.level+'</span></td>'+
-      '<td>'+(showDept?'<div class="dept-tag">'+r.dept+'</div><br>':'')+
-        '<span class="job-title">'+r.title+'</span></td>'+
+      '<td>'+(showDept?'<div class="dept-tag">'+r.dept+'</div><br>':'')+titleCell+'</td>'+
       '<td class="center bar-cell">'+renderBar(r.cLow,r.cHigh,'var(--company)')+'</td>'+
       '<td class="center bar-cell">'+renderBar(r.mLow,r.mHigh,'var(--market)')+'</td>'+
       '<td class="center gap-cell">'+renderGap(r,'m')+'</td>'+
-      bioTd+
-    '</tr>';
+      bioTd+'</tr>';
   }).join('');
 
   document.getElementById('cardList').innerHTML=rows.map(r=>{
-    const bioRows=r.bLow?
-      '<div class="card-divider"></div>'+
-      renderCardRow(r.bLow,r.bHigh,'var(--l1)','🧬 生技業市場'):'';
+    const hasJD=!!r.jd;
+    const titleEl=hasJD
+      ? `<span class="card-title job-title-link" onclick="openJDModal(${RAW.indexOf(r)})" style="font-size:14px">${r.title} <span class="jd-badge">JD</span></span>`
+      : `<span class="card-title">${r.title}</span>`;
+    const bioRows=r.bLow?'<div class="card-divider"></div>'+renderCardRow(r.bLow,r.bHigh,'var(--l1)','🧬 生技業市場'):'';
     return '<div class="salary-card">'+
-      '<div class="card-header">'+
-        '<span class="level-badge '+r.level+'">'+r.level+'</span>'+
-        (showDept?'<span class="card-dept-tag">'+r.dept+'</span>':'')+
-        '<span class="card-title">'+r.title+'</span>'+
-        renderGap(r,'m')+
-      '</div>'+
+      '<div class="card-header"><span class="level-badge '+r.level+'">'+r.level+'</span>'+
+      (showDept?'<span class="card-dept-tag">'+r.dept+'</span>':'')+
+      titleEl+renderGap(r,'m')+'</div>'+
       '<div class="card-rows">'+
         renderCardRow(r.cLow,r.cHigh,'var(--company)','🏢 公司現況')+
         '<div class="card-divider"></div>'+
         renderCardRow(r.mLow,r.mHigh,'var(--market)','📊 全產業市場')+
         bioRows+
-      '</div>'+
-    '</div>';
+      '</div></div>';
   }).join('');
 
   renderStats(rows);
@@ -707,14 +600,209 @@ function render() {
   }
 }
 
-// ==================== 側邊欄 / 切換 ====================
+// ── JD 閱覽 Modal ──
+function openJDModal(idx) {
+  const r = RAW[idx];
+  if (!r) return;
+  document.getElementById('jdModalLevel').textContent = r.level;
+  document.getElementById('jdModalLevel').className = 'level-badge '+r.level;
+  document.getElementById('jdModalTitle').textContent = r.title;
+  document.getElementById('jdModalDept').textContent = r.dept;
+  document.getElementById('jdModalSalary').textContent =
+    (r.cLow&&r.cHigh) ? fmt(r.cLow)+' – '+fmt(r.cHigh) : '—';
+
+  const isAdmin = ADMIN_USERS.includes(loggedInUser);
+  document.getElementById('jdAdminEditBtn').style.display = isAdmin ? 'inline' : 'none';
+
+  const body = document.getElementById('jdModalBody');
+  if (!r.jd) {
+    body.innerHTML = '<div class="jd-no-data"><div class="icon">📋</div><p>此職位尚未建立工作說明書</p>'+
+      (isAdmin?'<p class="jd-edit-hint" style="margin-top:8px">點擊下方「編輯此 JD」按鈕新增內容</p>':'')+'</div>';
+  } else {
+    const jd = r.jd;
+    const salHtml = (r.cLow&&r.cHigh) ? `
+      <div class="jd-salary-row">
+        <div class="jd-sal-card">
+          <div class="jd-sal-label">公司薪酬範圍 (2025)</div>
+          <div class="jd-sal-value" style="color:var(--company)">${fmt(r.cLow)} – ${fmt(r.cHigh)}</div>
+          <div class="jd-sal-sub">月薪中位 ${fmt(mid(r.cLow,r.cHigh))}</div>
+        </div>
+        <div class="jd-sal-card">
+          <div class="jd-sal-label">市場薪酬範圍 (2026)</div>
+          <div class="jd-sal-value" style="color:var(--market)">${fmt(r.mLow)} – ${fmt(r.mHigh)}</div>
+          <div class="jd-sal-sub">市場中位 ${fmt(mid(r.mLow,r.mHigh))}</div>
+        </div>
+      </div>` : '';
+
+    body.innerHTML = salHtml +
+      (jd.summary?`<div class="jd-section"><div class="jd-section-title">職位概述</div><p class="jd-summary">${jd.summary}</p></div>`:'') +
+      (jd.responsibilities?.length?`<div class="jd-section"><div class="jd-section-title">主要職責</div><ul class="jd-list">${jd.responsibilities.map(r=>'<li>'+r+'</li>').join('')}</ul></div>`:'') +
+      (jd.requirements?.length?`<div class="jd-section"><div class="jd-section-title">任職資格</div><div class="jd-tags">${jd.requirements.map(req=>'<span class="jd-tag'+(jd.mustHave?.includes(req)?' must':'')+'">'+(jd.mustHave?.includes(req)?'★ ':'')+req+'</span>').join('')}</div><div style="margin-top:6px;font-size:11px;color:var(--text-dim)">★ 必要條件</div></div>`:'') +
+      (jd.kpi?`<div class="jd-section"><div class="jd-section-title">績效指標 (KPI)</div><div class="jd-kpi">${jd.kpi}</div></div>`:'');
+  }
+  document.getElementById('jdModal').classList.add('open');
+}
+
+function closeJDModal() {
+  document.getElementById('jdModal').classList.remove('open');
+}
+document.getElementById('jdModal').addEventListener('click',function(e){if(e.target===this)closeJDModal();});
+
+// ── 管理員 Modal ──
+function openAdminModal() {
+  renderEditTable();
+  renderJDEditList();
+  document.getElementById('adminModal').classList.add('open');
+  document.getElementById('saveStatus').textContent='';
+  document.getElementById('adminPwInput').value='';
+}
+function closeAdminModal() { document.getElementById('adminModal').classList.remove('open'); }
+document.getElementById('adminModal').addEventListener('click',function(e){if(e.target===this)closeAdminModal();});
+
+function switchEditTab(tab) {
+  document.querySelectorAll('.edit-tab').forEach((el,i)=>el.classList.toggle('active',['salary','jd'][i]===tab));
+  document.getElementById('editPanelSalary').classList.toggle('active',tab==='salary');
+  document.getElementById('editPanelJD').classList.toggle('active',tab==='jd');
+}
+
+// ── 薪酬編輯表格 ──
+function n(v){return(v===null||v===undefined||v==='')?'':v;}
+function renderEditTable() {
+  document.getElementById('editTableBody').innerHTML = RAW.map((r,i)=>
+    `<tr data-idx="${i}">
+      <td><input class="edit-input wide" value="${n(r.dept)}" data-field="dept" placeholder="部門"></td>
+      <td><input class="edit-input wide" value="${n(r.title)}" data-field="title" placeholder="職稱"></td>
+      <td><select class="edit-input level-sel" data-field="level">${['L1','L2','L3','L4','L5'].map(l=>`<option${r.level===l?' selected':''}>${l}</option>`).join('')}</select></td>
+      <td><input class="edit-input" type="number" value="${n(r.cLow)}" data-field="cLow"></td>
+      <td><input class="edit-input" type="number" value="${n(r.cHigh)}" data-field="cHigh"></td>
+      <td><input class="edit-input" type="number" value="${n(r.mLow)}" data-field="mLow"></td>
+      <td><input class="edit-input" type="number" value="${n(r.mHigh)}" data-field="mHigh"></td>
+      <td><input class="edit-input" type="number" value="${n(r.bLow)}" data-field="bLow"></td>
+      <td><input class="edit-input" type="number" value="${n(r.bHigh)}" data-field="bHigh"></td>
+      <td><button class="del-btn" onclick="delEditRow(${i})">✕</button></td>
+    </tr>`
+  ).join('');
+}
+function delEditRow(idx){if(!confirm('確定刪除？'))return;RAW.splice(idx,1);renderEditTable();renderJDEditList();}
+function addEditRow(){RAW.push({dept:'',title:'',level:'L1',cLow:null,cHigh:null,mLow:null,mHigh:null,bLow:null,bHigh:null});renderEditTable();renderJDEditList();}
+
+// ── JD 編輯列表 ──
+function renderJDEditList() {
+  const list = document.getElementById('jdEditList');
+  list.innerHTML = RAW.map((r,i) => {
+    const jd = r.jd || {};
+    const hasJD = !!r.jd;
+    return `<div class="jd-edit-card">
+      <div class="jd-edit-card-head" onclick="toggleJDCard(${i})">
+        <div class="title">
+          <span class="level-badge ${r.level}">${r.level}</span>
+          ${r.dept} — ${r.title}
+          ${hasJD?'<span class="jd-badge">已建立</span>':'<span style="font-size:10px;color:var(--text-dim);font-family:DM Mono,monospace">未建立</span>'}
+        </div>
+        <span class="chevron" id="chev_${i}">▼</span>
+      </div>
+      <div class="jd-edit-card-body" id="jdBody_${i}">
+        <div class="jd-field">
+          <label>職位概述</label>
+          <textarea class="jd-textarea" id="jd_summary_${i}" placeholder="簡述此職位的主要目的與定位（2–3 句）">${n(jd.summary)}</textarea>
+        </div>
+        <div class="jd-field">
+          <label>主要職責</label>
+          <textarea class="jd-textarea" id="jd_resp_${i}" placeholder="每行一項職責，換行分隔" style="min-height:100px">${(jd.responsibilities||[]).join('\n')}</textarea>
+          <div class="jd-hint">每行一項，例如：負責薪資計算與申報作業</div>
+        </div>
+        <div class="jd-field">
+          <label>任職資格</label>
+          <textarea class="jd-textarea" id="jd_req_${i}" placeholder="每行一項資格條件，換行分隔">${(jd.requirements||[]).join('\n')}</textarea>
+          <div class="jd-hint">每行一項，例如：熟悉勞動基準法</div>
+        </div>
+        <div class="jd-field">
+          <label>必要條件（從任職資格中選填，完全相符的文字）</label>
+          <textarea class="jd-textarea" id="jd_must_${i}" placeholder="每行一項，須與任職資格文字完全一致" style="min-height:50px">${(jd.mustHave||[]).join('\n')}</textarea>
+          <div class="jd-hint">填入後會在 JD 中以藍色標記顯示</div>
+        </div>
+        <div class="jd-field">
+          <label>績效指標 (KPI)</label>
+          <textarea class="jd-textarea" id="jd_kpi_${i}" placeholder="例如：招募到職率、薪資計算正確率" style="min-height:50px">${n(jd.kpi)}</textarea>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleJDCard(i) {
+  const body = document.getElementById('jdBody_'+i);
+  const chev = document.getElementById('chev_'+i);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  chev.classList.toggle('open',!isOpen);
+}
+
+// ── 收集所有編輯資料 ──
+function collectAllData() {
+  // 薪酬數字
+  document.querySelectorAll('#editTableBody tr').forEach((tr,i) => {
+    if (!RAW[i]) return;
+    tr.querySelectorAll('[data-field]').forEach(inp => {
+      const f = inp.dataset.field;
+      if (f==='dept'||f==='title'||f==='level') { RAW[i][f]=inp.value.trim(); }
+      else { const v=inp.value.trim(); RAW[i][f]=v===''?null:parseInt(v); }
+    });
+  });
+  // JD 文字
+  RAW.forEach((r,i) => {
+    const summary = document.getElementById('jd_summary_'+i)?.value.trim()||'';
+    const resp    = (document.getElementById('jd_resp_'+i)?.value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    const req     = (document.getElementById('jd_req_'+i)?.value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    const must    = (document.getElementById('jd_must_'+i)?.value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    const kpi     = document.getElementById('jd_kpi_'+i)?.value.trim()||'';
+    // 若所有欄位都空白，就不加 jd 物件
+    if (!summary && !resp.length && !req.length && !kpi) { delete RAW[i].jd; }
+    else { RAW[i].jd = { summary, responsibilities:resp, requirements:req, mustHave:must, kpi }; }
+  });
+}
+
+// ── 儲存並推送 GitHub ──
+async function saveAndPush() {
+  const pw = document.getElementById('adminPwInput').value.trim();
+  if (!pw) { setStatus('❌ 請輸入管理員密碼','err'); return; }
+  collectAllData();
+  for (let i=0;i<RAW.length;i++) {
+    if (!RAW[i].dept||!RAW[i].title){setStatus(`❌ 第 ${i+1} 列部門或職稱不可空白`,'err');return;}
+  }
+  const saveBtn=document.getElementById('saveBtn');
+  saveBtn.disabled=true;
+  document.getElementById('saveBtnText').textContent='⏳ 推送中...';
+  setStatus('正在推送至 GitHub...','loading');
+  try {
+    const res = await fetch('/api/update',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({adminPassword:pw, rows:RAW})
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      buildDeptMap(); buildSidebar(); render();
+      renderJDEditList();
+      setStatus('✅ 已推送！Vercel 約 30 秒後完成部署','ok');
+    } else { setStatus('❌ '+(data.error||'推送失敗'),'err'); }
+  } catch(err) { setStatus('❌ 網路錯誤：'+err.message,'err'); }
+  saveBtn.disabled=false;
+  document.getElementById('saveBtnText').textContent='💾 儲存並推送 GitHub';
+}
+
+function setStatus(msg,cls){
+  const el=document.getElementById('saveStatus');
+  el.textContent=msg; el.className='save-status '+(cls||'');
+}
+
+// ── 側邊欄 ──
 function buildSidebar() {
   let html='';
   if (canViewAll) html+='<div class="dept-all active" onclick="setDept(\'__all__\')">☰ 全公司總覽</div>';
   deptOrder.forEach(d=>{
     if (!allowedDepts.includes(d)) return;
     const id='btn_'+d.replace(/[^\w\u4e00-\u9fff]/g,'_');
-    html+='<button class="dept-btn" onclick="setDept(\''+d+'\')" id="'+id+'">'+d+'<span class="dept-count">'+deptMap[d].length+'</span></button>';
+    html+=`<button class="dept-btn" onclick="setDept('${d}')" id="${id}">${d}<span class="dept-count">${deptMap[d].length}</span></button>`;
   });
   document.getElementById('deptList').innerHTML=html;
 }
@@ -723,8 +811,8 @@ function setDept(d) {
   currentDept=d;
   document.querySelectorAll('.dept-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.dept-all').forEach(b=>b.classList.remove('active'));
-  if (d==='__all__') { const el=document.querySelector('.dept-all'); if(el) el.classList.add('active'); }
-  else { const btn=document.getElementById('btn_'+d.replace(/[^\w\u4e00-\u9fff]/g,'_')); if(btn) btn.classList.add('active'); }
+  if (d==='__all__'){const el=document.querySelector('.dept-all');if(el)el.classList.add('active');}
+  else{const btn=document.getElementById('btn_'+d.replace(/[^\w\u4e00-\u9fff]/g,'_'));if(btn)btn.classList.add('active');}
   render(); window.scrollTo(0,0);
 }
 
@@ -734,139 +822,8 @@ function setUnit(u) {
   render();
 }
 
-// ==================== 管理員編輯 Modal ====================
-function openAdminModal() {
-  renderEditTable();
-  document.getElementById('adminModal').classList.add('open');
-  document.getElementById('saveStatus').textContent = '';
-  document.getElementById('adminPwInput').value = '';
-}
-
-function closeAdminModal() {
-  document.getElementById('adminModal').classList.remove('open');
-}
-
-// 點遮罩關閉
-document.getElementById('adminModal').addEventListener('click', function(e) {
-  if (e.target === this) closeAdminModal();
-});
-
-function n(v) { return (v===null||v===undefined||v==='') ? '' : v; }
-
-function renderEditTable() {
-  const tbody = document.getElementById('editTableBody');
-  tbody.innerHTML = RAW.map((r, i) =>
-    `<tr data-idx="${i}">
-      <td><input class="edit-input wide" value="${n(r[0])}" data-col="0" placeholder="部門"></td>
-      <td><input class="edit-input wide" value="${n(r[1])}" data-col="1" placeholder="職稱"></td>
-      <td>
-        <select class="edit-input level-sel" data-col="2">
-          ${['L1','L2','L3','L4','L5'].map(l=>`<option${r[2]===l?' selected':''}>${l}</option>`).join('')}
-        </select>
-      </td>
-      <td><input class="edit-input" type="number" value="${n(r[3])}" data-col="3" placeholder="—"></td>
-      <td><input class="edit-input" type="number" value="${n(r[4])}" data-col="4" placeholder="—"></td>
-      <td><input class="edit-input" type="number" value="${n(r[5])}" data-col="5" placeholder="—"></td>
-      <td><input class="edit-input" type="number" value="${n(r[6])}" data-col="6" placeholder="—"></td>
-      <td><input class="edit-input" type="number" value="${n(r[7])}" data-col="7" placeholder="—"></td>
-      <td><input class="edit-input" type="number" value="${n(r[8])}" data-col="8" placeholder="—"></td>
-      <td><button class="del-btn" onclick="delEditRow(${i})" title="刪除此列">✕</button></td>
-    </tr>`
-  ).join('');
-}
-
-function delEditRow(idx) {
-  if (!confirm('確定刪除這個職位？')) return;
-  RAW.splice(idx, 1);
-  renderEditTable();
-}
-
-function addEditRow() {
-  RAW.push(['', '', 'L1', null, null, null, null, null, null]);
-  renderEditTable();
-  // 捲動到最後一列
-  const tbody = document.getElementById('editTableBody');
-  tbody.lastElementChild && tbody.lastElementChild.scrollIntoView({ behavior: 'smooth' });
-}
-
-function collectEditData() {
-  const rows = [];
-  document.querySelectorAll('#editTableBody tr').forEach(tr => {
-    const inputs = tr.querySelectorAll('[data-col]');
-    const row = [];
-    inputs.forEach(inp => {
-      const col = parseInt(inp.dataset.col);
-      if (col === 0 || col === 1 || col === 2) {
-        row[col] = inp.value.trim();
-      } else {
-        const v = inp.value.trim();
-        row[col] = v === '' ? null : parseInt(v);
-      }
-    });
-    rows.push(row);
-  });
-  return rows;
-}
-
-async function saveAndPush() {
-  const pw = document.getElementById('adminPwInput').value.trim();
-  if (!pw) { document.getElementById('saveStatus').textContent = '❌ 請輸入管理員密碼'; document.getElementById('saveStatus').className = 'save-status err'; return; }
-
-  const newRows = collectEditData();
-
-  // 基本驗證
-  for (let i = 0; i < newRows.length; i++) {
-    if (!newRows[i][0] || !newRows[i][1]) {
-      document.getElementById('saveStatus').textContent = `❌ 第 ${i+1} 列部門或職稱不可空白`;
-      document.getElementById('saveStatus').className = 'save-status err';
-      return;
-    }
-  }
-
-  const saveBtn = document.getElementById('saveBtn');
-  const statusEl = document.getElementById('saveStatus');
-  saveBtn.disabled = true;
-  document.getElementById('saveBtnText').textContent = '⏳ 推送中...';
-  statusEl.textContent = '正在推送至 GitHub...';
-  statusEl.className = 'save-status loading';
-
-  try {
-    const res = await fetch('/api/update', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminPassword: pw, rows: newRows })
-    });
-    const data = await res.json();
-
-    if (res.ok && data.success) {
-      // 更新本地資料，立即重新渲染
-      RAW = newRows;
-      buildDeptMap();
-      buildSidebar();
-      render();
-
-      statusEl.textContent = '✅ 已推送！Vercel 約 30 秒後完成部署';
-      statusEl.className = 'save-status ok';
-      document.getElementById('saveBtnText').textContent = '💾 儲存並推送 GitHub';
-    } else {
-      statusEl.textContent = '❌ ' + (data.error || '推送失敗');
-      statusEl.className = 'save-status err';
-      document.getElementById('saveBtnText').textContent = '💾 儲存並推送 GitHub';
-    }
-  } catch (err) {
-    statusEl.textContent = '❌ 網路錯誤：' + err.message;
-    statusEl.className = 'save-status err';
-    document.getElementById('saveBtnText').textContent = '💾 儲存並推送 GitHub';
-  }
-
-  saveBtn.disabled = false;
-}
-
-// ==================== 初始化 ====================
-(async () => {
-  await loadData();
-  document.getElementById('empInput').focus();
-})();
+// ── 初始化 ──
+(async()=>{ await loadData(); document.getElementById('empInput').focus(); })();
 </script>
 </body>
 </html>

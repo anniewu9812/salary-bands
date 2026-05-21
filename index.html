@@ -141,6 +141,33 @@ td.center{text-align:center;}
   .stats-row{gap:8px;} .stat-card{padding:10px 14px;min-width:0;flex:1 1 calc(50% - 8px);} .stat-value{font-size:16px;}
   .table-wrap{display:none;} .card-list{display:flex!important;} .legend{gap:8px;} .legend-item{font-size:11px;}
   .main-header{margin-bottom:16px;} .dept-title{font-size:18px;} .admin-btn{display:none!important;}
+
+  /* 手機 JD 點擊區塊 */
+  .card-jd-btn{
+    display:flex; align-items:center; gap:6px;
+    width:100%; padding:10px 12px; margin-top:2px;
+    background:var(--accent-glow); border:1px solid rgba(79,142,247,.25);
+    border-radius:8px; cursor:pointer;
+    font-family:'Noto Sans TC',sans-serif; font-size:13px;
+    color:var(--accent); font-weight:600;
+    transition:background .15s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .card-jd-btn:active{background:rgba(79,142,247,.2);}
+
+  /* 手機 Modal 全螢幕 */
+  .modal-backdrop{align-items:flex-end;}
+  .modal{
+    border-radius:16px 16px 0 0;
+    max-height:92vh;
+    width:100%;
+    max-width:100%;
+  }
+  .jd-modal-head{padding:18px 20px;}
+  .jd-main-title{font-size:18px;}
+  .modal-body{padding:16px 20px;}
+  .modal-footer{padding:12px 20px;}
+  .jd-salary-row{grid-template-columns:1fr;}
 }
 .card-list{display:none;flex-direction:column;gap:10px;}
 .salary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
@@ -574,20 +601,26 @@ function render() {
 
   document.getElementById('cardList').innerHTML=rows.map(r=>{
     const hasJD=!!r.jd;
-    const titleEl=hasJD
-      ? `<span class="card-title job-title-link" onclick="openJDModal(${RAW.indexOf(r)})" style="font-size:14px">${r.title} <span class="jd-badge">JD</span></span>`
-      : `<span class="card-title">${r.title}</span>`;
+    const idx=RAW.indexOf(r);
     const bioRows=r.bLow?'<div class="card-divider"></div>'+renderCardRow(r.bLow,r.bHigh,'var(--l1)','🧬 生技業市場'):'';
+    const jdBtn=hasJD
+      ? `<button class="card-jd-btn" onclick="openJDModal(${idx})">📋 查看工作說明書 (JD)</button>`
+      : '';
     return '<div class="salary-card">'+
-      '<div class="card-header"><span class="level-badge '+r.level+'">'+r.level+'</span>'+
-      (showDept?'<span class="card-dept-tag">'+r.dept+'</span>':'')+
-      titleEl+renderGap(r,'m')+'</div>'+
+      '<div class="card-header">'+
+        '<span class="level-badge '+r.level+'">'+r.level+'</span>'+
+        (showDept?'<span class="card-dept-tag">'+r.dept+'</span>':'')+
+        '<span class="card-title">'+r.title+'</span>'+
+        renderGap(r,'m')+
+      '</div>'+
       '<div class="card-rows">'+
         renderCardRow(r.cLow,r.cHigh,'var(--company)','🏢 公司現況')+
         '<div class="card-divider"></div>'+
         renderCardRow(r.mLow,r.mHigh,'var(--market)','📊 全產業市場')+
         bioRows+
-      '</div></div>';
+      '</div>'+
+      jdBtn+
+    '</div>';
   }).join('');
 
   renderStats(rows);
